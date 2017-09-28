@@ -22,7 +22,10 @@
             //the app model allows easy display of modal dialogs by passing a view model
             //views are usually located by convention, but you an specify it as well with viewUrl
             item.viewUrl = 'views/detail';
-            app.showDialog(item);
+            app.showMessage('You have unsaved data. Are you sure you want to close?', 'Unsaved Data', ['Yes', 'No']).then(function(dialogResult) {
+                app.showDialog(item);
+            });
+            
         },
         canDeactivate: function () {
             //the router's activator calls this function to see if it can leave the screen

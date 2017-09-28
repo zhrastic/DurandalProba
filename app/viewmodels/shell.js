@@ -1,4 +1,13 @@
 ﻿define(['plugins/router', 'durandal/app'], function (router, app) {
+
+    // Redirecting from / to first route
+    router.guardRoute = function (routeInfo, params, instance) {
+        if (params.fragment === '') {
+            return routeInfo.router.routes[0].hash;
+        }
+        return true;
+    };
+
     return {
         router: router,
         search: function() {
@@ -9,7 +18,8 @@
         activate: function () {
             router.map([
                 { route: '', title:'Welcome', moduleId: 'viewmodels/welcome', nav: true },
-                { route: 'flickr', moduleId: 'viewmodels/flickr', nav: true }
+                { route: 'flickr', moduleId: 'viewmodels/flickr', nav: true },
+                { route: 'zvonko*podrute', hash: '#zvonko', moduleId: 'zvonko/index', nav: true, admin:true }
             ]).buildNavigationModel();
             
             return router.activate();
